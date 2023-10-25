@@ -52,7 +52,7 @@ let hours = Math.round(timeDiff % (1000 * 60 *60 * 24)/(1000 *60 *60));
 let minutes = Math.round(timeDiff % (1000 * 60 * 60) / (1000 * 60));
 let seconds = Math.round(timeDiff % (1000 * 60) / 1000);
 
-console.log(days, hours, minutes, seconds);
+
 
 // Display result
 document.getElementById("demo").innerHTML = days + " days " + hours + " hours "
@@ -64,3 +64,26 @@ if (timeDiff < 0) {
   document.getElementById("demo").innerHTML = "EXPIRED";
 }
 }, 1000);
+
+
+function EventDetail(eventName, location, date) {
+  this.eventName = eventName;
+  this.location = location;
+  this.date = date;
+}
+EventDetail.prototype.getBio = function(){
+  console.log(this.eventName + " will be held in " + this.location + " on " + this.date + " hurry and get your tickets before event ends!");
+}
+const rolls = new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023" );
+const poke = new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023");
+const habachi = new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024");
+
+const events = [
+  rolls,
+  poke,
+  habachi
+]
+
+for(let i = 0; i < events.length; i++){
+  console.log(events[i].getBio())
+}
