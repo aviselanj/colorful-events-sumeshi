@@ -70,20 +70,42 @@ function EventDetail(eventName, location, date) {
   this.eventName = eventName;
   this.location = location;
   this.date = date;
+  //methods
+  this.bio = function(){
+    console.log(this.eventName + " will be held in " + this.location + " on " + this.date + " hurry and get your tickets before event ends!");
+  }
 }
-EventDetail.prototype.getBio = function(){
-  console.log(this.eventName + " will be held in " + this.location + " on " + this.date + " hurry and get your tickets before event ends!");
+
+
+
+function EventsMaster(){
+  this.events = [];
+
+  //methods
+  this.add = function(newEvent){
+    this.events.push(newEvent)
+  }
+  this.getBio = function(){
+    this.events.forEach(
+      function(x){
+        x.bio();
+      }
+    )
+  }
 }
-const rolls = new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023" );
-const poke = new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023");
-const habachi = new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024");
+const eventsMaster = new EventsMaster();
 
-const events = [
-  rolls,
-  poke,
-  habachi
-]
+eventsMaster.add(new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023"));
+eventsMaster.add(new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023"));
+eventsMaster.add(new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024"));
 
-for(let i = 0; i < events.length; i++){
-  console.log(events[i].getBio())
+eventsMaster.getBio();
+
+function filterBySearch (bio){
+  const filtered = eventsMaster.events.filter(
+    function(x){
+      return x.bio == bio;
+    }
+  );
+  console.log(filtered);
 }
