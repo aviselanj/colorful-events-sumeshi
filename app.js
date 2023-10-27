@@ -102,10 +102,23 @@ eventsMaster.add(new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 202
 eventsMaster.getBio();
 
 function filterBySearch (bio){
+  let searchBtn = document.getElementById("search");
+  let input = document.getElementById("input");
   const filtered = eventsMaster.events.filter(
     function(x){
       return x.bio == bio;
     }
+  
   );
-  console.log(filtered);
+  searchBtn.addEventListener("submit", e =>{
+    e.preventDefault();
+
+    if(input.value == filtered){
+      console.log(filtered)
+    }
+   } 
+  )
+    
+  
+  return filtered;
 }
