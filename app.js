@@ -92,33 +92,32 @@ function EventsMaster(){
       }
     )
   }
+  
 }
 const eventsMaster = new EventsMaster();
 
-eventsMaster.add(new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023"));
-eventsMaster.add(new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023"));
-eventsMaster.add(new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024"));
+const sushiRollEvent = eventsMaster.add(new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023"));
+const pokeBowlEvent = eventsMaster.add(new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023"));
+const habachiGrillEvent = eventsMaster.add(new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024"));
+
+let eventArr = [
+  sushiRollEvent,
+  pokeBowlEvent,
+  habachiGrillEvent
+]
 
 eventsMaster.getBio();
 
-function filterBySearch (bio){
-  let searchBtn = document.getElementById("search");
-  let input = document.getElementById("input");
-  const filtered = eventsMaster.events.filter(
-    function(x){
-      return x.bio == bio;
-    }
-  
-  );
-  searchBtn.addEventListener("submit", e =>{
-    e.preventDefault();
-
-    if(input.value == filtered){
-      console.log(filtered)
-    }
-   } 
-  )
+function search_eventl() { 
+  let input = document.getElementById('search').value 
+  input=input.toLowerCase(); 
     
-  
-  return filtered;
-}
+  for (i = 0; i < eventArr.length; i++) {  
+      if (!eventArr[i].toLowerCase().includes(input)) { 
+          eventArr[i].style.display="none"; 
+      } 
+      else { 
+          eventArr[i].style.display="list-item";                  
+      } 
+  } 
+} 
