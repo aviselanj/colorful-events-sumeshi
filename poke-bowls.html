@@ -7,40 +7,44 @@
         <title>About Sumeshi</title>
     </head>
     <body class="p-3 mb-2 bg-danger text-white">
-    <header>
+      <header>
+
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="index.html">Sumeshi</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Special Events
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="sushi.html">Sushi Roll Event</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="poke.html">Poke Bowl Event</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="habachi.html">Habachi Grill Event</a></li>
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Sumeshi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Special Events
+                  </a>
+                  <ul id="search-drop-menu" class="dropdown-menu">
+                        <li><a class="dropdown-item" href="sushi-rolls.html">Sushi Roll Event</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="poke-bowls.html">Poke Bowl Event</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="habachi.html">Habachi Grill Event</a></li>
+                  </ul>
+                  <form  id="input-search" class="d-flex" role="search">
+                    <input class="form-control me-2"  type="text"  oninput="handleSearch(event)" placeholder="Search" aria-label="Search" >
+                    <ul id="search-dropdown" class="dropdown-menu w-100">
+                      <li><a class="dropdown-item" href="#">EXAMPLE</a></li>
                     </ul>
-        
-               </div>
-               <form class="d-flex" role="search">
-                <input class="form-control me-2" id="input" type="search" placeholder="Search events.." aria-label="Search">
-                <button onclick="filterBySearch()" class="btn btn-outline-success" id="search" type="submit">Search</button>
-              </form>
-          </nav>
-    </header>
+                  </form>
+             </div>
+             
+        </nav>
+      
+      </header>
     <main>
         <h1 class="mx-auto p-2" style="width: 300px;">
          Sumeshi Poke In House Cooking Competition

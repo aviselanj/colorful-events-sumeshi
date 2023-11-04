@@ -1,33 +1,58 @@
 'use strict'
 
-  
-  
+const stopWatch = {
+  days: document.getElementById("days"),
+  hours: document.getElementById("hours"),
+  minutes: document.getElementById("minutes"),
+  seconds: document.getElementById("seconds"), 
+};
  
-  // Handle Form Submission
- let loginForm = document.getElementById("loginForm");
+const searchDropMenu = document.getElementById("search-dropdown");
 
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let username = document.getElementById("validationServerUsername");
-  
-
- if (username.value == "") {
-    alert("Please ensure you input a value in all fields!");
-  } else {
-    // perform operation with form input
-    alert("This form has been successfully submitted!");
-    console.log(
-      `This form has a username of ${username.value}`
-    );
-
-    username.value = "";
-   
+function EventDetail(eventName, location, date) {
+  this.eventName = eventName;
+  this.location = location;
+  this.eventDate = new Date(date).getTime();
+  this.interval = null;
+  this.days= 0;
+  this.hours= 0;
+  this.minutes = 0;
+  this.seconds= 0;
+  //methods
+  this.bio = function(){
+    console.log(this.eventName + " will be held in " + this.location + " on " + this.date + " hurry and get your tickets before event ends!");
   }
-});
+  this.start = function(){
+    this.interval= setInterval(()=>{
+      const now = new Date().getTime();
+      const timeDiff = this.eventDate.getTime() - now;
+
+      if(timeDiff <= 0){
+        clearInterval(this.interval);
+        alert("Event Expired");
+      }else{
+        this.days = Math.round(timeDiff / (1000 * 60 * 60 * 24));
+        this.hours = Math.round(
+          (timeDiff % (1000 * 60 *60 * 24)/(1000 *60 *60))
+        );
+        this.minutes = Math.round(
+          (timeDiff % (1000 * 60 * 60) / (1000 * 60))
+        );
+        this.seconds = Math.round(
+          (timeDiff % (1000 * 60) / 1000));
+        this.milliseconds = timeDiff % 100;
+        this.renderStopWatch();
+      }
+    }, 1000);
+  };
+  this.stop = function(){
+    if(this.interval){
+      clearInterval(this.interval);
+    }
+  };
 
 
-const greetingTimeout = setTimeout(greeting, 10000);
+const greetingTimeout = setTimeout(greeting, 50000);
 
 
 function greeting(){
@@ -40,12 +65,12 @@ greetingTimeout;
 const nearYouDate = new Date("Nov 4, 2023 15:30:01").getTime();
 
 
-let watch = setInterval(function(){
+let watch = function setInterval (){
   // Get todays date
   const today = new Date().getTime();
-
+}
 // Find the distance between now and event
-const timeDiff = nearYouDate - today;
+const timeDiff = nearYouDate - watch();
 //Time calculations
 let days = Math.round(timeDiff/ (1000 * 60 * 60 * 24));
 let hours = Math.round(timeDiff % (1000 * 60 *60 * 24)/(1000 *60 *60));
@@ -54,70 +79,53 @@ let seconds = Math.round(timeDiff % (1000 * 60) / 1000);
 
 
 
-// Display result
-document.getElementById("demo").innerHTML = days + " days " + hours + " hours "
-  + minutes + " minutes and " + seconds + " seconds untill the festivities!";
-
-// If the count down is finished, write some text
-if (timeDiff < 0) {
-  clearInterval(watch);
-  document.getElementById("demo").innerHTML = "EXPIRED";
-}
-}, 1000);
-
-
-function EventDetail(eventName, location, date) {
-  this.eventName = eventName;
-  this.location = location;
-  this.date = date;
-  //methods
-  this.bio = function(){
-    console.log(this.eventName + " will be held in " + this.location + " on " + this.date + " hurry and get your tickets before event ends!");
-  }
-}
 
 
 
-function EventsMaster(){
-  this.events = [];
-
-  //methods
-  this.add = function(newEvent){
-    this.events.push(newEvent)
-  }
-  this.getBio = function(){
-    this.events.forEach(
-      function(x){
-        x.bio();
-      }
-    )
-  }
   
+
+this.renderSearchContent = function(){
+  const searchList = document.createElement("li");
+  const href = this.eventName.toLowerCase().replaceAll(" ", "-") + ".html";
+  searchList.innerHTML = `<a class="dropdown-item" href="${href}">${this.eventName}</a>`
+  searchDropMenu.appendChild(searchList);
 }
-const eventsMaster = new EventsMaster();
 
-const sushiRollEvent = eventsMaster.add(new EventDetail("Sushi Rolls", "New Orleans, La", "November 5, 2023"));
-const pokeBowlEvent = eventsMaster.add(new EventDetail("Poke Bowls", "Atlanta, Ga", "December 15, 2023"));
-const habachiGrillEvent = eventsMaster.add(new EventDetail("Habachi Grill", "Houston, Tx", "Januray 1, 2024"));
+  this.renderStopWatch = function(){
+  stopWatch.days.textContent = this.days;
+  stopWatch.hours.textContent = this.hours;
+  stopWatch.minutes.textContent = this.minutes;
+  stopWatch.seconds.textContent = this.seconds;
+  };
 
-let eventArr = [
-  sushiRollEvent,
-  pokeBowlEvent,
-  habachiGrillEvent
+  this.renderEventDetails = function (){
+    const dateStr = this.date.toDateString();
+    const timeStr = this.date.toLocaleTimeString();
+
+    document.getElementById(date).textContent = dateStr;
+    document.getElementById(time).textContent = timeStr;
+  };
+}
+
+
+const sumeshiEvents = [
+  // sushi event
+  new EventDetail("Sushi Rolls", "New Orleans, La", "2023-11-05T14:00:00"),
+  // poke bowl event
+  new EventDetail("Poke Bowls", "Atlanta, Ga", "2023-12-15T13:15:00"),
+  // habachi event
+  new EventDetail("Habachi", "Houston, Tx", "2024-01-01T11:00:00")
 ]
 
-eventsMaster.getBio();
 
-function search_eventl() { 
-  let input = document.getElementById('search').value 
-  input=input.toLowerCase(); 
-    
-  for (i = 0; i < eventArr.length; i++) {  
-      if (!eventArr[i].toLowerCase().includes(input)) { 
-          eventArr[i].style.display="none"; 
-      } 
-      else { 
-          eventArr[i].style.display="list-item";                  
-      } 
-  } 
-} 
+function handleSearch(event){
+  event.preventDefault();
+
+  searchDropMenu.innerHTML = "";
+  searchDropMenu.classList.add("show");
+const filteredEvents = sumeshiEvents.filter((i)=>
+  i.eventName.toLowerCase().includes(event.target.value.toLowerCase())
+);
+console.log(filteredEvents);
+filteredEvents.forEach((i)=> i.renderSearchContent());
+}
